@@ -165,8 +165,14 @@ async function loadWeather() {
 }
 
 /* ============================
-   Todo List
+   Todo List — 三家庭各自獨立
    ============================ */
+const FAMILIES = {
+  yoyo: '妖妖一家',
+  dudu: '肚肚一家',
+  niao: '鳥鳥一家',
+};
+
 const CATEGORY_ICONS = {
   document: '📄',
   luggage:  '🧳',
@@ -188,75 +194,89 @@ const CATEGORY_LABELS = {
 };
 
 const DEFAULT_TODOS = [
-  // 證件
-  { id: 1,  text: '護照（確認效期超過 6 個月）',       cat: 'document', done: false },
-  { id: 2,  text: '護照影本（另外放一份備用）',         cat: 'document', done: false },
-  { id: 3,  text: '身分證',                            cat: 'document', done: false },
-  { id: 4,  text: '泰國電子簽證 / 確認免簽資格',       cat: 'document', done: false },
-  { id: 5,  text: '旅遊行程表（紙本 + 電子版）',       cat: 'document', done: false },
-  { id: 6,  text: '保險文件（旅遊平安險）',             cat: 'document', done: false },
-  { id: 7,  text: '役男出境核准章確認',                cat: 'document', done: false },
-  // 金錢
-  { id: 8,  text: '泰銖現金（每人至少 20,000 泰銖）', cat: 'money',    done: false },
-  { id: 9,  text: '台幣備用金',                        cat: 'money',    done: false },
-  { id: 10, text: '信用卡（Visa / Master）',           cat: 'money',    done: false },
-  { id: 11, text: '確認信用卡海外手續費設定',          cat: 'money',    done: false },
-  // 行李
-  { id: 12, text: '行李箱（不超過 23 公斤）',          cat: 'luggage',  done: false },
-  { id: 13, text: '隨身包包 / 後背包',                 cat: 'luggage',  done: false },
-  { id: 14, text: '行李秤',                            cat: 'luggage',  done: false },
-  { id: 15, text: '購物袋（泰國不提供塑膠袋）',        cat: 'luggage',  done: false },
-  { id: 16, text: '雨傘 / 雨衣',                      cat: 'luggage',  done: false },
-  { id: 17, text: '防水袋',                            cat: 'luggage',  done: false },
-  // 衣物
-  { id: 18, text: '輕薄透氣衣物（5–6 套）',            cat: 'clothing', done: false },
-  { id: 19, text: '泳衣（水上樂園用）',                cat: 'clothing', done: false },
-  { id: 20, text: '寺廟參觀用長褲 / 長裙',             cat: 'clothing', done: false },
-  { id: 21, text: '運動鞋 / 防水鞋',                   cat: 'clothing', done: false },
-  { id: 22, text: '拖鞋（飯店 / 海灘用）',             cat: 'clothing', done: false },
-  { id: 23, text: '帽子 / 遮陽配件',                   cat: 'clothing', done: false },
-  // 健康
-  { id: 24, text: '防曬乳（SPF 50+）',                 cat: 'health',   done: false },
-  { id: 25, text: '防蚊液',                            cat: 'health',   done: false },
-  { id: 26, text: '腸胃藥 / 止瀉藥',                   cat: 'health',   done: false },
-  { id: 27, text: '感冒藥 / 退燒藥',                   cat: 'health',   done: false },
-  { id: 28, text: '暈車藥',                            cat: 'health',   done: false },
-  { id: 29, text: 'OK 繃 / 消毒藥水',                  cat: 'health',   done: false },
-  { id: 30, text: '牙刷 / 牙膏（飯店不提供）',         cat: 'health',   done: false },
-  { id: 31, text: '刮鬍刀 / 個人盥洗用品',             cat: 'health',   done: false },
-  // 3C
-  { id: 32, text: '手機充電器',                        cat: 'tech',     done: false },
-  { id: 33, text: '行動電源（100Wh 以下）',             cat: 'tech',     done: false },
-  { id: 34, text: '泰國 5G SIM 卡（旅行社贈送確認）', cat: 'tech',     done: false },
-  { id: 35, text: '萬用轉接頭（220V）',                cat: 'tech',     done: false },
-  { id: 36, text: '相機 / 備用記憶卡',                 cat: 'tech',     done: false },
-  { id: 37, text: '耳機',                              cat: 'tech',     done: false },
+  { id: 1,  text: '護照（確認效期超過 6 個月）',        cat: 'document', done: false },
+  { id: 2,  text: '護照影本（另外放一份備用）',          cat: 'document', done: false },
+  { id: 3,  text: '身分證',                             cat: 'document', done: false },
+  { id: 4,  text: '泰國電子簽證 / 確認免簽資格',        cat: 'document', done: false },
+  { id: 5,  text: '旅遊行程表（紙本 + 電子版）',        cat: 'document', done: false },
+  { id: 6,  text: '保險文件（旅遊平安險）',              cat: 'document', done: false },
+  { id: 7,  text: '役男出境核准章確認',                 cat: 'document', done: false },
+  { id: 8,  text: '泰銖現金（每人至少 20,000 泰銖）',  cat: 'money',    done: false },
+  { id: 9,  text: '台幣備用金',                         cat: 'money',    done: false },
+  { id: 10, text: '信用卡（Visa / Master）',            cat: 'money',    done: false },
+  { id: 11, text: '確認信用卡海外手續費設定',           cat: 'money',    done: false },
+  { id: 12, text: '行李箱（不超過 23 公斤）',           cat: 'luggage',  done: false },
+  { id: 13, text: '隨身包包 / 後背包',                  cat: 'luggage',  done: false },
+  { id: 14, text: '行李秤',                             cat: 'luggage',  done: false },
+  { id: 15, text: '購物袋（泰國不提供塑膠袋）',         cat: 'luggage',  done: false },
+  { id: 16, text: '雨傘 / 雨衣',                       cat: 'luggage',  done: false },
+  { id: 17, text: '防水袋',                             cat: 'luggage',  done: false },
+  { id: 18, text: '輕薄透氣衣物（5–6 套）',             cat: 'clothing', done: false },
+  { id: 19, text: '泳衣（水上樂園用）',                 cat: 'clothing', done: false },
+  { id: 20, text: '寺廟參觀用長褲 / 長裙',              cat: 'clothing', done: false },
+  { id: 21, text: '運動鞋 / 防水鞋',                    cat: 'clothing', done: false },
+  { id: 22, text: '拖鞋（飯店 / 海灘用）',              cat: 'clothing', done: false },
+  { id: 23, text: '帽子 / 遮陽配件',                    cat: 'clothing', done: false },
+  { id: 24, text: '防曬乳（SPF 50+）',                  cat: 'health',   done: false },
+  { id: 25, text: '防蚊液',                             cat: 'health',   done: false },
+  { id: 26, text: '腸胃藥 / 止瀉藥',                    cat: 'health',   done: false },
+  { id: 27, text: '感冒藥 / 退燒藥',                    cat: 'health',   done: false },
+  { id: 28, text: '暈車藥',                             cat: 'health',   done: false },
+  { id: 29, text: 'OK 繃 / 消毒藥水',                   cat: 'health',   done: false },
+  { id: 30, text: '牙刷 / 牙膏（飯店不提供）',          cat: 'health',   done: false },
+  { id: 31, text: '刮鬍刀 / 個人盥洗用品',              cat: 'health',   done: false },
+  { id: 32, text: '手機充電器',                         cat: 'tech',     done: false },
+  { id: 33, text: '行動電源（100Wh 以下）',              cat: 'tech',     done: false },
+  { id: 34, text: '泰國 5G SIM 卡（旅行社贈送確認）',  cat: 'tech',     done: false },
+  { id: 35, text: '萬用轉接頭（220V）',                 cat: 'tech',     done: false },
+  { id: 36, text: '相機 / 備用記憶卡',                  cat: 'tech',     done: false },
+  { id: 37, text: '耳機',                               cat: 'tech',     done: false },
 ];
 
-let todos = [];
-let currentFilter = 'all';
-let nextId = 100;
+let currentFamily = 'yoyo';
+let currentFilter  = 'all';
+let familyNextId   = { yoyo: 100, dudu: 100, niao: 100 };
 
-function loadTodos() {
-  try {
-    const saved = localStorage.getItem('thailand2026_todos');
-    if (saved) {
-      todos = JSON.parse(saved);
-      nextId = Math.max(...todos.map(t => t.id), 99) + 1;
-    } else {
-      todos = JSON.parse(JSON.stringify(DEFAULT_TODOS));
-    }
-  } catch(e) {
-    todos = JSON.parse(JSON.stringify(DEFAULT_TODOS));
-  }
+function storageKey(family) {
+  return `thailand2026_todos_${family}`;
 }
 
-function saveTodos() {
-  localStorage.setItem('thailand2026_todos', JSON.stringify(todos));
+function loadFamilyTodos(family) {
+  try {
+    const saved = localStorage.getItem(storageKey(family));
+    if (saved) {
+      const data = JSON.parse(saved);
+      familyNextId[family] = Math.max(...data.map(t => t.id), 99) + 1;
+      return data;
+    }
+  } catch(e) {}
+  familyNextId[family] = 100;
+  return JSON.parse(JSON.stringify(DEFAULT_TODOS));
+}
+
+function saveFamilyTodos(family, todos) {
+  localStorage.setItem(storageKey(family), JSON.stringify(todos));
+}
+
+function getCurrentTodos() {
+  return loadFamilyTodos(currentFamily);
+}
+
+function switchFamily(family, btn) {
+  currentFamily = family;
+  currentFilter = 'all';
+  document.querySelectorAll('.family-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent === '全部');
+  });
+  renderTodos();
 }
 
 function renderTodos() {
-  const list = document.getElementById('todoList');
+  const todos = getCurrentTodos();
+  const list  = document.getElementById('todoList');
+
   const filtered = todos.filter(t => {
     if (currentFilter === 'pending') return !t.done;
     if (currentFilter === 'done')    return t.done;
@@ -264,12 +284,11 @@ function renderTodos() {
   });
 
   if (filtered.length === 0) {
-    list.innerHTML = '<div style="text-align:center;color:#aaa;padding:32px;">沒有項目</div>';
-    updateStats();
+    list.innerHTML = '<div style="text-align:center;color:#aaa;padding:32px;font-size:0.95rem;">沒有項目</div>';
+    updateStats(todos);
     return;
   }
 
-  // Group by category
   const groups = {};
   filtered.forEach(t => {
     if (!groups[t.cat]) groups[t.cat] = [];
@@ -277,13 +296,10 @@ function renderTodos() {
   });
 
   const catOrder = ['document', 'money', 'luggage', 'clothing', 'health', 'tech', 'other'];
-
   let html = '';
   catOrder.forEach(cat => {
     if (!groups[cat]) return;
-    const icon = CATEGORY_ICONS[cat];
-    const label = CATEGORY_LABELS[cat];
-    html += `<div class="todo-category-header">${icon} ${label}</div>`;
+    html += `<div class="todo-category-header">${CATEGORY_ICONS[cat]} ${CATEGORY_LABELS[cat]}</div>`;
     groups[cat].forEach(t => {
       html += `
         <div class="todo-item ${t.done ? 'done' : ''}" data-id="${t.id}">
@@ -291,42 +307,44 @@ function renderTodos() {
           <span class="todo-cat-icon">${CATEGORY_ICONS[t.cat]}</span>
           <span class="todo-text">${escapeHtml(t.text)}</span>
           <button class="todo-delete" onclick="deleteTodo(${t.id})" title="刪除">✕</button>
-        </div>
-      `;
+        </div>`;
     });
   });
 
   list.innerHTML = html;
-  updateStats();
+  updateStats(todos);
 }
 
-function updateStats() {
-  const done = todos.filter(t => t.done).length;
+function updateStats(todos) {
+  if (!todos) todos = getCurrentTodos();
+  const done  = todos.filter(t => t.done).length;
   const total = todos.length;
-  document.getElementById('statDone').textContent = done;
+  document.getElementById('statDone').textContent  = done;
   document.getElementById('statTotal').textContent = total;
   const pct = total ? (done / total * 100) : 0;
   document.getElementById('progressFill').style.width = pct + '%';
 }
 
 function toggleTodo(id) {
+  const todos = getCurrentTodos();
   const t = todos.find(t => t.id === id);
-  if (t) { t.done = !t.done; saveTodos(); renderTodos(); }
+  if (t) { t.done = !t.done; saveFamilyTodos(currentFamily, todos); renderTodos(); }
 }
 
 function deleteTodo(id) {
-  todos = todos.filter(t => t.id !== id);
-  saveTodos();
+  const todos = getCurrentTodos().filter(t => t.id !== id);
+  saveFamilyTodos(currentFamily, todos);
   renderTodos();
 }
 
 function addTodo() {
   const input = document.getElementById('newTodoInput');
-  const cat = document.getElementById('newTodoCategory').value;
-  const text = input.value.trim();
+  const cat   = document.getElementById('newTodoCategory').value;
+  const text  = input.value.trim();
   if (!text) { input.focus(); return; }
-  todos.push({ id: nextId++, text, cat, done: false });
-  saveTodos();
+  const todos = getCurrentTodos();
+  todos.push({ id: familyNextId[currentFamily]++, text, cat, done: false });
+  saveFamilyTodos(currentFamily, todos);
   renderTodos();
   input.value = '';
   input.focus();
@@ -336,7 +354,7 @@ function filterTodos(mode) {
   currentFilter = mode;
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.filter-btn').forEach(b => {
-    if (b.textContent.includes(mode === 'all' ? '全部' : mode === 'pending' ? '未完成' : '已完成'))
+    if (b.textContent === (mode === 'all' ? '全部' : mode === 'pending' ? '未完成' : '已完成'))
       b.classList.add('active');
   });
   renderTodos();

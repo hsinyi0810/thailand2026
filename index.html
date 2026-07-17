@@ -384,11 +384,18 @@
     <section class="tab-content" id="tab-todo">
       <div class="section-header">
         <h2><i data-lucide="check-square"></i> 行前準備清單</h2>
-        <p>出國前必備物品，勾選已準備好的項目</p>
+        <p>各家庭各自勾選，資料獨立儲存</p>
       </div>
 
-      <div class="todo-stats" id="todoStats">
-        <span id="statDone">0</span> / <span id="statTotal">0</span> 項已完成
+      <!-- 家庭切換 -->
+      <div class="family-tabs">
+        <button class="family-tab active" data-family="yoyo" onclick="switchFamily('yoyo', this)">🏠 妖妖一家</button>
+        <button class="family-tab" data-family="dudu" onclick="switchFamily('dudu', this)">🏠 肚肚一家</button>
+        <button class="family-tab" data-family="niao" onclick="switchFamily('niao', this)">🏠 鳥鳥一家</button>
+      </div>
+
+      <div class="todo-stats">
+        <div class="stats-text"><span id="statDone">0</span> / <span id="statTotal">0</span> 項已完成</div>
         <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
       </div>
 
