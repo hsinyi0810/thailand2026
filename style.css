@@ -205,7 +205,10 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 6px;
+  cursor: pointer;
+  user-select: none;
 }
+.hero-scroll-hint:hover { color: rgba(255,255,255,0.9); }
 
 .scroll-arrow {
   width: 20px; height: 20px;
