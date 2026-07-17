@@ -1,4 +1,61 @@
 /* ============================
+   Hero Slideshow
+   ============================ */
+(function() {
+  const slides = document.querySelectorAll('.hero-slide');
+  const dotsContainer = document.getElementById('heroSlideDots');
+  let current = 0;
+
+  // Create dots
+  slides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'slide-dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => goTo(i);
+    dotsContainer.appendChild(dot);
+  });
+
+  function goTo(n) {
+    slides[current].classList.remove('active');
+    dotsContainer.children[current].classList.remove('active');
+    current = (n + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dotsContainer.children[current].classList.add('active');
+  }
+
+  setInterval(() => goTo(current + 1), 5000);
+})();
+
+/* ============================
+   Countdown Timer
+   ============================ */
+(function() {
+  const target = new Date('2026-07-21T05:00:00+08:00');
+  const el = document.getElementById('heroCountdown');
+  if (!el) return;
+
+  function update() {
+    const now = new Date();
+    const diff = target - now;
+    if (diff <= 0) {
+      el.innerHTML = '<div style="font-size:1.1rem;font-weight:700;color:#E8A020;">🎉 出發囉！泰國，我們來了！</div>';
+      return;
+    }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    el.innerHTML = `
+      <div class="countdown-unit"><span class="countdown-num">${d}</span><div class="countdown-label">天</div></div>
+      <div class="countdown-unit"><span class="countdown-num">${String(h).padStart(2,'0')}</span><div class="countdown-label">時</div></div>
+      <div class="countdown-unit"><span class="countdown-num">${String(m).padStart(2,'0')}</span><div class="countdown-label">分</div></div>
+      <div class="countdown-unit"><span class="countdown-num">${String(s).padStart(2,'0')}</span><div class="countdown-label">秒</div></div>
+    `;
+  }
+  update();
+  setInterval(update, 1000);
+})();
+
+/* ============================
    Tab Navigation
    ============================ */
 document.querySelectorAll('.tab-btn').forEach(btn => {

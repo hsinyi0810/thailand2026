@@ -5,22 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>🇹🇭 泰國曼谷 + 華欣 6 日遊 2026</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
 </head>
 <body>
 
   <!-- Header -->
   <header class="hero">
+    <div class="hero-slides">
+      <div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1563492065599-3520f775eeed?w=1600&auto=format&fit=crop')"></div>
+      <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?w=1600&auto=format&fit=crop')"></div>
+      <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=1600&auto=format&fit=crop')"></div>
+      <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=1600&auto=format&fit=crop')"></div>
+    </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <div class="hero-badge">【親子 B 團】</div>
-      <h1>曼谷 + 華欣 6 日遊</h1>
+      <div class="hero-badge">🇹🇭 【親子 B 團】</div>
+      <h1>曼谷 + 華欣</h1>
+      <h2 class="hero-sub">6 日精彩之旅</h2>
       <p class="hero-date">2026 年 7 月 21 日 — 7 月 26 日</p>
       <div class="hero-meta">
         <span>✈️ CI833 / CI836</span>
         <span>🏨 3 間飯店</span>
         <span>🗓️ 6 天 5 夜</span>
+        <span>👨‍👩‍👧 親子同樂</span>
       </div>
+      <div class="hero-countdown" id="heroCountdown"></div>
+    </div>
+    <div class="hero-slide-dots" id="heroSlideDots"></div>
+    <div class="hero-scroll-hint">
+      <span>向下滑動</span>
+      <div class="scroll-arrow"></div>
     </div>
   </header>
 
@@ -154,11 +168,42 @@
         <p>曼谷 + 華欣 6 日精彩行程</p>
       </div>
 
+      <!-- 景點圖片走馬燈 -->
+      <div class="spots-gallery">
+        <div class="spot-card">
+          <img src="https://images.unsplash.com/photo-1566559532215-dcc92e4be0be?w=400&auto=format&fit=crop" alt="ICONSIAM" loading="lazy"/>
+          <div class="spot-label">ICONSIAM 暹羅天地</div>
+        </div>
+        <div class="spot-card">
+          <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=400&auto=format&fit=crop" alt="美功鐵道市集" loading="lazy"/>
+          <div class="spot-label">美功鐵道市集</div>
+        </div>
+        <div class="spot-card">
+          <img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=400&auto=format&fit=crop" alt="水上市場" loading="lazy"/>
+          <div class="spot-label">丹能沙朵水上市場</div>
+        </div>
+        <div class="spot-card">
+          <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&auto=format&fit=crop" alt="華欣海灘" loading="lazy"/>
+          <div class="spot-label">華欣海灘</div>
+        </div>
+        <div class="spot-card">
+          <img src="https://images.unsplash.com/photo-1572715376701-98568319fd0b?w=400&auto=format&fit=crop" alt="水上樂園" loading="lazy"/>
+          <div class="spot-label">Vana Nava 水上樂園</div>
+        </div>
+        <div class="spot-card">
+          <img src="https://images.unsplash.com/photo-1541960071727-c531398e7c50?w=400&auto=format&fit=crop" alt="洽圖洽市集" loading="lazy"/>
+          <div class="spot-label">洽圖洽周末市集</div>
+        </div>
+      </div>
+
       <div class="itinerary-timeline">
 
         <div class="day-card">
-          <div class="day-badge">Day 1</div>
-          <div class="day-date">7/21 （二）</div>
+          <div class="day-card-header">
+            <div class="day-badge">Day 1</div>
+            <div class="day-date">7/21 （二）</div>
+            <div class="day-location-badge">📍 曼谷</div>
+          </div>
           <div class="day-content">
             <div class="day-activities">
               <p>🛬 抵達曼谷機場</p>
@@ -177,8 +222,11 @@
         </div>
 
         <div class="day-card">
-          <div class="day-badge">Day 2</div>
-          <div class="day-date">7/22 （三）</div>
+          <div class="day-card-header">
+            <div class="day-badge">Day 2</div>
+            <div class="day-date">7/22 （三）</div>
+            <div class="day-location-badge">📍 曼谷 → 華欣</div>
+          </div>
           <div class="day-content">
             <div class="day-activities">
               <p>🚂 MAE KLONG 美功鐵道市集（每人提供奶茶一杯）</p>
@@ -198,8 +246,11 @@
         </div>
 
         <div class="day-card">
-          <div class="day-badge">Day 3</div>
-          <div class="day-date">7/23 （四）</div>
+          <div class="day-card-header">
+            <div class="day-badge">Day 3</div>
+            <div class="day-date">7/23 （四）</div>
+            <div class="day-location-badge">📍 華欣</div>
+          </div>
           <div class="day-content">
             <div class="day-activities">
               <p>🦒 華欣動物園（不包含長頸鹿拍照）</p>
@@ -217,8 +268,11 @@
         </div>
 
         <div class="day-card">
-          <div class="day-badge">Day 4</div>
-          <div class="day-date">7/24 （五）</div>
+          <div class="day-card-header">
+            <div class="day-badge">Day 4</div>
+            <div class="day-date">7/24 （五）</div>
+            <div class="day-location-badge">📍 華欣</div>
+          </div>
           <div class="day-content">
             <div class="day-activities">
               <p>🎢 全日 Vana Nava Hua Hin 叢林水上樂園（午餐在此自理）</p>
@@ -235,8 +289,11 @@
         </div>
 
         <div class="day-card">
-          <div class="day-badge">Day 5</div>
-          <div class="day-date">7/25 （六）</div>
+          <div class="day-card-header">
+            <div class="day-badge">Day 5</div>
+            <div class="day-date">7/25 （六）</div>
+            <div class="day-location-badge">📍 華欣 → 曼谷</div>
+          </div>
           <div class="day-content">
             <div class="day-activities">
               <p>🌳 華欣樹頂冒險樂園 TREE TOP ADVENTURE PARK HUA HIN（9 人參加）</p>
@@ -256,8 +313,11 @@
         </div>
 
         <div class="day-card">
-          <div class="day-badge">Day 6</div>
-          <div class="day-date">7/26 （日）</div>
+          <div class="day-card-header">
+            <div class="day-badge">Day 6</div>
+            <div class="day-date">7/26 （日）</div>
+            <div class="day-location-badge">📍 曼谷 → 台灣</div>
+          </div>
           <div class="day-content">
             <div class="day-activities">
               <p>🛍️ 洽圖洽周末市集（午餐在此自理）</p>
@@ -471,8 +531,10 @@
   </main>
 
   <footer class="footer">
-    <p>🇹🇭 泰國曼谷 + 華欣 6 日遊 2026 &nbsp;·&nbsp; Goplay 旅遊</p>
-    <p style="font-size:0.8rem;opacity:0.6;margin-top:4px;">資料僅供參考，請以旅行社最新公告為準</p>
+    <div class="footer-flag">🇹🇭</div>
+    <p style="font-size:1.1rem;font-weight:700;">泰國曼谷 + 華欣 6 日遊 2026</p>
+    <p style="margin-top:6px;opacity:0.7;">Goplay 旅遊 &nbsp;·&nbsp; 【親子 B 團】</p>
+    <p style="font-size:0.78rem;opacity:0.45;margin-top:12px;">資料僅供參考，請以旅行社最新公告為準</p>
   </footer>
 
   <script src="app.js"></script>
