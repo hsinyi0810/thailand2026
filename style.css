@@ -580,7 +580,12 @@ body {
   padding: 6px 0;
   border-bottom: 1px dashed var(--border);
   font-size: 0.95rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
 }
+.day-activities p .icon-svg { margin-top: 2px; flex-shrink: 0; }
+.day-activities p .icon-svg svg { width: 15px; height: 15px; stroke: var(--primary); }
 
 .day-activities p:last-child { border-bottom: none; }
 
