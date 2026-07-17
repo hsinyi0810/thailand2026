@@ -446,6 +446,18 @@ body {
   padding: 8px;
 }
 
+.flight-terminal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  color: var(--primary-dark);
+  font-weight: 600;
+  margin-top: 6px;
+}
+.flight-terminal .icon-svg svg { width: 13px; height: 13px; stroke: var(--primary-dark); }
+
 /* ============================
    Hotels
    ============================ */
@@ -665,7 +677,8 @@ body {
   margin-bottom: 16px;
 }
 
-.weather-header h3 { font-size: 1rem; font-weight: 700; }
+.weather-header h3 { font-size: 1rem; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+.weather-header h3 .icon-svg svg { width: 16px; height: 16px; stroke: var(--primary-dark); }
 
 .weather-updated {
   font-size: 0.75rem;
@@ -701,7 +714,8 @@ body {
 }
 
 .wday-date { font-size: 0.82rem; font-weight: 700; color: var(--text-sub); margin-bottom: 8px; }
-.wday-icon { font-size: 2rem; margin-bottom: 6px; }
+.wday-icon { margin-bottom: 6px; display: flex; justify-content: center; }
+.wday-icon .icon-svg svg { width: 32px; height: 32px; stroke: var(--primary); }
 .wday-desc { font-size: 0.78rem; color: var(--text-sub); margin-bottom: 8px; min-height: 20px; }
 .wday-temp { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
 .wday-temp .max { color: var(--accent); }
@@ -715,7 +729,8 @@ body {
   color: var(--text-sub);
 }
 
-.wday-extra span { display: block; }
+.wday-extra span { display: flex; align-items: center; gap: 4px; }
+.wday-extra .icon-svg svg { width: 12px; height: 12px; }
 
 .weather-tips { background: var(--white); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
 .weather-tips h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 20px; }
@@ -894,7 +909,11 @@ body {
   margin: 16px 0 8px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
+.todo-category-header .icon-svg svg { width: 15px; height: 15px; stroke: var(--primary-dark); }
 
 .todo-item {
   display: flex;
@@ -928,7 +947,8 @@ body {
 .todo-checkbox.checked { background: var(--secondary); border-color: var(--secondary); }
 .todo-checkbox.checked::after { content: '✓'; color: white; font-size: 14px; font-weight: 800; }
 
-.todo-cat-icon { font-size: 1.1rem; flex-shrink: 0; }
+.todo-cat-icon { flex-shrink: 0; display: inline-flex; align-items: center; }
+.todo-cat-icon .icon-svg svg { width: 16px; height: 16px; stroke: var(--text-sub); }
 .todo-text { flex: 1; font-size: 0.95rem; }
 
 .todo-delete {

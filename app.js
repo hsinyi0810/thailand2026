@@ -79,18 +79,24 @@ const TRIP_DAYS_MAP = {
 };
 const TRIP_DATE_KEYS = Object.keys(TRIP_DAYS_MAP);
 
-// Open-Meteo WMO weather code → emoji + 中文描述
+// Helper: get inline SVG string from ICONS map
+function svgIcon(name, extra) {
+  const svg = (typeof ICONS !== 'undefined' && ICONS[name]) ? ICONS[name] : '';
+  return `<span class="icon-svg"${extra ? ' style="'+extra+'"' : ''}>${svg}</span>`;
+}
+
+// Open-Meteo WMO weather code → SVG icon + 中文描述
 function wmoToInfo(code) {
-  if (code === 0)              return { icon: '☀️',  desc: '晴天' };
-  if (code <= 2)               return { icon: '⛅',  desc: '晴時多雲' };
-  if (code === 3)              return { icon: '☁️',  desc: '陰天' };
-  if (code <= 49)              return { icon: '🌫️',  desc: '霧或霾' };
-  if (code <= 55)              return { icon: '🌦️',  desc: '毛毛雨' };
-  if (code <= 65)              return { icon: '🌧️',  desc: '降雨' };
-  if (code <= 77)              return { icon: '🌨️',  desc: '降雪' };
-  if (code <= 82)              return { icon: '🌦️',  desc: '間歇陣雨' };
-  if (code <= 99)              return { icon: '⛈️',  desc: '雷陣雨' };
-  return { icon: '🌡️', desc: '未知' };
+  if (code === 0)  return { icon: svgIcon('sun'),        desc: '晴天' };
+  if (code <= 2)   return { icon: svgIcon('cloud-sun'),  desc: '晴時多雲' };
+  if (code === 3)  return { icon: svgIcon('cloud-sun'),  desc: '陰天' };
+  if (code <= 49)  return { icon: svgIcon('droplets'),   desc: '霧或霾' };
+  if (code <= 55)  return { icon: svgIcon('cloud-rain'), desc: '毛毛雨' };
+  if (code <= 65)  return { icon: svgIcon('cloud-rain'), desc: '降雨' };
+  if (code <= 77)  return { icon: svgIcon('cloud-rain'), desc: '降雪' };
+  if (code <= 82)  return { icon: svgIcon('cloud-rain'), desc: '間歇陣雨' };
+  if (code <= 99)  return { icon: svgIcon('cloud-rain'), desc: '雷陣雨' };
+  return { icon: svgIcon('thermometer'), desc: '未知' };
 }
 
 let weatherLoaded = false;
@@ -138,9 +144,9 @@ async function loadWeather() {
             <span class="max">${max}°</span> / <span class="min">${min}°</span>
           </div>
           <div class="wday-extra">
-            <span title="降雨機率">🌧 ${rain}%</span>
-            <span title="降水量">💧${precip}mm</span>
-            <span title="最大風速">💨${wind}km/h</span>
+            <span title="降雨機率">${svgIcon('cloud-rain')} ${rain}%</span>
+            <span title="降水量">${svgIcon('droplets')}${precip}mm</span>
+            <span title="最大風速">${svgIcon('waves')}${wind}km/h</span>
           </div>
         </div>`;
     }).join('');
@@ -149,7 +155,7 @@ async function loadWeather() {
 
     container.innerHTML = `
       <div class="weather-header">
-        <h3>🗓️ 旅遊期間即時天氣預報</h3>
+        <h3>${svgIcon('calendar')} 旅遊期間即時天氣預報</h3>
         <span class="weather-updated">Open-Meteo · 更新於 ${now}</span>
       </div>
       <div class="weather-days">${cards}</div>
@@ -157,7 +163,7 @@ async function loadWeather() {
   } catch (err) {
     container.innerHTML = `
       <div style="text-align:center;padding:32px;color:#888;">
-        <div style="font-size:2rem;margin-bottom:8px;">⚠️</div>
+        <div style="margin-bottom:8px;">${svgIcon('alert-triangle', 'width:32px;height:32px;stroke:#e74c3c')}</div>
         <p>天氣資料載入失敗，請檢查網路連線</p>
         <button onclick="weatherLoaded=false;loadWeather()" style="margin-top:12px;padding:8px 20px;border:1px solid #ddd;border-radius:8px;cursor:pointer;background:#fff;">重新載入</button>
       </div>`;
@@ -174,13 +180,13 @@ const FAMILIES = {
 };
 
 const CATEGORY_ICONS = {
-  document: '📄',
-  luggage:  '🧳',
-  money:    '💰',
-  health:   '💊',
-  tech:     '📱',
-  clothing: '👕',
-  other:    '📦',
+  document: svgIcon('file-text'),
+  luggage:  svgIcon('luggage'),
+  money:    svgIcon('banknote'),
+  health:   svgIcon('shield-check'),
+  tech:     svgIcon('zap'),
+  clothing: svgIcon('shirt'),
+  other:    svgIcon('check-square'),
 };
 
 const CATEGORY_LABELS = {
