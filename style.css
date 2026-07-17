@@ -347,7 +347,7 @@ body {
 }
 
 .info-banner-icon { flex-shrink: 0; }
-.info-banner-icon .icon-svg svg { width: 28px; height: 28px; }
+.info-banner-icon .icon-svg svg { width: 28px; height: 28px; stroke: var(--primary); }
 
 /* ============================
    Flight Cards
