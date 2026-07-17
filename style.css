@@ -596,7 +596,27 @@ body {
 
 @keyframes spin { to { transform: rotate(360deg); } }
 
-.weather-days { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; }
+.weather-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.weather-header h3 { font-size: 1rem; font-weight: 700; }
+
+.weather-updated {
+  font-size: 0.75rem;
+  color: var(--text-sub);
+  background: var(--bg);
+  padding: 4px 10px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+
+.weather-days { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; }
 
 .weather-day-card {
   background: var(--bg);
@@ -604,14 +624,38 @@ body {
   padding: 16px 12px;
   text-align: center;
   border: 1px solid var(--border);
+  transition: box-shadow 0.2s;
 }
 
-.wday-date { font-size: 0.78rem; font-weight: 700; color: var(--text-sub); margin-bottom: 8px; }
-.wday-icon { font-size: 2rem; margin-bottom: 8px; }
-.wday-desc { font-size: 0.78rem; color: var(--text-sub); margin-bottom: 6px; }
-.wday-temp { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+.weather-day-card:hover { box-shadow: var(--shadow); }
+
+.wday-location {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--white);
+  background: var(--secondary);
+  border-radius: 10px;
+  padding: 2px 8px;
+  display: inline-block;
+  margin-bottom: 6px;
+}
+
+.wday-date { font-size: 0.82rem; font-weight: 700; color: var(--text-sub); margin-bottom: 8px; }
+.wday-icon { font-size: 2rem; margin-bottom: 6px; }
+.wday-desc { font-size: 0.78rem; color: var(--text-sub); margin-bottom: 8px; min-height: 20px; }
+.wday-temp { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
 .wday-temp .max { color: var(--accent); }
 .wday-temp .min { color: var(--secondary); }
+
+.wday-extra {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 0.72rem;
+  color: var(--text-sub);
+}
+
+.wday-extra span { display: block; }
 
 .weather-tips { background: var(--white); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
 .weather-tips h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 20px; }

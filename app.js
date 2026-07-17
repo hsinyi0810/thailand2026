@@ -69,49 +69,99 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 });
 
 /* ============================
-   Weather
+   Weather — Open-Meteo API (free, no key)
+   曼谷: 13.7563°N, 100.5018°E
+   華欣: 12.5684°N, 99.9577°E
    ============================ */
-const TRIP_DATES = ['7/21', '7/22', '7/23', '7/24', '7/25', '7/26'];
-const TRIP_DAYS  = ['二', '三', '四', '五', '六', '日'];
+const TRIP_DAYS_MAP = {
+  '2026-07-21': '二', '2026-07-22': '三', '2026-07-23': '四',
+  '2026-07-24': '五', '2026-07-25': '六', '2026-07-26': '日',
+};
+const TRIP_DATE_KEYS = Object.keys(TRIP_DAYS_MAP);
 
-// Bangkok weather simulation for July 2026 (real-world typical values)
-const WEATHER_DATA = [
-  { date: '7/21', day: '二', icon: '⛅', desc: '多雲午後雷陣雨', max: 34, min: 27, rain: '60%', humid: '82%' },
-  { date: '7/22', day: '三', icon: '🌦️', desc: '間歇陣雨', max: 33, min: 27, rain: '70%', humid: '85%' },
-  { date: '7/23', day: '四', icon: '🌤️', desc: '晴時多雲', max: 35, min: 28, rain: '40%', humid: '78%' },
-  { date: '7/24', day: '五', icon: '⛅', desc: '多雲有陣雨', max: 33, min: 27, rain: '65%', humid: '83%' },
-  { date: '7/25', day: '六', icon: '🌧️', desc: '陣雨頻繁', max: 32, min: 26, rain: '75%', humid: '87%' },
-  { date: '7/26', day: '日', icon: '🌤️', desc: '多雲晴朗', max: 34, min: 27, rain: '35%', humid: '79%' },
-];
+// Open-Meteo WMO weather code → emoji + 中文描述
+function wmoToInfo(code) {
+  if (code === 0)              return { icon: '☀️',  desc: '晴天' };
+  if (code <= 2)               return { icon: '⛅',  desc: '晴時多雲' };
+  if (code === 3)              return { icon: '☁️',  desc: '陰天' };
+  if (code <= 49)              return { icon: '🌫️',  desc: '霧或霾' };
+  if (code <= 55)              return { icon: '🌦️',  desc: '毛毛雨' };
+  if (code <= 65)              return { icon: '🌧️',  desc: '降雨' };
+  if (code <= 77)              return { icon: '🌨️',  desc: '降雪' };
+  if (code <= 82)              return { icon: '🌦️',  desc: '間歇陣雨' };
+  if (code <= 99)              return { icon: '⛈️',  desc: '雷陣雨' };
+  return { icon: '🌡️', desc: '未知' };
+}
 
 let weatherLoaded = false;
 
-function loadWeather() {
+async function loadWeather() {
   if (weatherLoaded) return;
   weatherLoaded = true;
 
   const container = document.getElementById('weatherForecast');
-  setTimeout(() => {
-    container.innerHTML = `
-      <h3 style="font-weight:700;margin-bottom:16px;font-size:1rem;">
-        🗓️ 旅遊期間天氣預報（曼谷 / 華欣）
-        <span style="font-size:0.75rem;color:#888;font-weight:400;margin-left:8px;">7月份預估資料</span>
-      </h3>
-      <div class="weather-days">
-        ${WEATHER_DATA.map(d => `
-          <div class="weather-day-card">
-            <div class="wday-date">7/${d.date.split('/')[1]}（${d.day}）</div>
-            <div class="wday-icon">${d.icon}</div>
-            <div class="wday-desc">${d.desc}</div>
-            <div class="wday-temp">
-              <span class="max">${d.max}°</span> / <span class="min">${d.min}°</span>
-            </div>
-            <div style="font-size:0.75rem;color:#888;margin-top:4px;">🌧 ${d.rain} · 💧${d.humid}</div>
+
+  // 同時抓曼谷 & 華欣天氣
+  const BKK_URL = 'https://api.open-meteo.com/v1/forecast?latitude=13.7563&longitude=100.5018&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,windspeed_10m_max&timezone=Asia%2FBangkok&start_date=2026-07-21&end_date=2026-07-26';
+  const HHQ_URL = 'https://api.open-meteo.com/v1/forecast?latitude=12.5684&longitude=99.9577&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,windspeed_10m_max&timezone=Asia%2FBangkok&start_date=2026-07-21&end_date=2026-07-26';
+
+  try {
+    const [bkkRes, hhqRes] = await Promise.all([fetch(BKK_URL), fetch(HHQ_URL)]);
+    const [bkk, hhq] = await Promise.all([bkkRes.json(), hhqRes.json()]);
+
+    // Day 1–2 曼谷, Day 3–5 華欣, Day 6 曼谷
+    const locationMap = { 0:'曼谷', 1:'曼谷', 2:'華欣', 3:'華欣', 4:'華欣', 5:'曼谷' };
+    const dataMap     = { 0: bkk,   1: bkk,   2: hhq,   3: hhq,   4: hhq,   5: bkk   };
+
+    const cards = TRIP_DATE_KEYS.map((dateKey, i) => {
+      const data   = dataMap[i].daily;
+      const idx    = data.time.indexOf(dateKey);
+      if (idx === -1) return '';
+
+      const { icon, desc } = wmoToInfo(data.weathercode[idx]);
+      const max    = Math.round(data.temperature_2m_max[idx]);
+      const min    = Math.round(data.temperature_2m_min[idx]);
+      const rain   = data.precipitation_probability_max[idx] ?? '--';
+      const precip = data.precipitation_sum[idx]?.toFixed(1) ?? '--';
+      const wind   = Math.round(data.windspeed_10m_max[idx] ?? 0);
+      const loc    = locationMap[i];
+      const mmdd   = dateKey.slice(5).replace('-', '/');
+      const day    = TRIP_DAYS_MAP[dateKey];
+
+      return `
+        <div class="weather-day-card">
+          <div class="wday-location">${loc}</div>
+          <div class="wday-date">${mmdd}（${day}）</div>
+          <div class="wday-icon">${icon}</div>
+          <div class="wday-desc">${desc}</div>
+          <div class="wday-temp">
+            <span class="max">${max}°</span> / <span class="min">${min}°</span>
           </div>
-        `).join('')}
+          <div class="wday-extra">
+            <span title="降雨機率">🌧 ${rain}%</span>
+            <span title="降水量">💧${precip}mm</span>
+            <span title="最大風速">💨${wind}km/h</span>
+          </div>
+        </div>`;
+    }).join('');
+
+    const now = new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei', hour: '2-digit', minute: '2-digit' });
+
+    container.innerHTML = `
+      <div class="weather-header">
+        <h3>🗓️ 旅遊期間即時天氣預報</h3>
+        <span class="weather-updated">Open-Meteo · 更新於 ${now}</span>
       </div>
+      <div class="weather-days">${cards}</div>
     `;
-  }, 800);
+  } catch (err) {
+    container.innerHTML = `
+      <div style="text-align:center;padding:32px;color:#888;">
+        <div style="font-size:2rem;margin-bottom:8px;">⚠️</div>
+        <p>天氣資料載入失敗，請檢查網路連線</p>
+        <button onclick="weatherLoaded=false;loadWeather()" style="margin-top:12px;padding:8px 20px;border:1px solid #ddd;border-radius:8px;cursor:pointer;background:#fff;">重新載入</button>
+      </div>`;
+  }
 }
 
 /* ============================
