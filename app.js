@@ -374,14 +374,3 @@ function escapeHtml(str) {
 loadTodos();
 renderTodos();
 
-// Init Lucide icons (runs after DOM is ready)
-if (typeof lucide !== 'undefined') lucide.createIcons();
-document.addEventListener('DOMContentLoaded', () => {
-  if (typeof lucide !== 'undefined') lucide.createIcons();
-});
-// Re-run after tab switch (icons in hidden tabs need re-render)
-document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    setTimeout(() => { if (typeof lucide !== 'undefined') lucide.createIcons(); }, 50);
-  });
-});

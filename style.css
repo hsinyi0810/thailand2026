@@ -219,31 +219,34 @@ body {
 }
 
 /* ============================
-   Lucide Icon Global
+   Inline SVG Icons
    ============================ */
-i[data-lucide], svg.lucide {
-  display: inline-block;
+.icon-svg {
+  display: inline-flex;
+  align-items: center;
   vertical-align: middle;
   flex-shrink: 0;
 }
 
 /* Section header icons */
-.section-header h2 svg.lucide,
-.section-sub-header h3 svg.lucide,
-.note-category h3 svg.lucide {
+.section-header h2 .icon-svg svg,
+.section-sub-header h3 .icon-svg svg,
+.note-category h3 .icon-svg svg {
   width: 20px; height: 20px;
-  margin-right: 6px;
+  margin-right: 7px;
   stroke: var(--primary-dark);
   stroke-width: 2;
   vertical-align: -3px;
+  flex-shrink: 0;
 }
 
 /* Tab button icons */
-.tab-btn svg.lucide {
+.tab-btn .icon-svg svg {
   width: 16px; height: 16px;
   margin-right: 5px;
-  vertical-align: -2px;
+  stroke: currentColor;
   stroke-width: 2;
+  vertical-align: -2px;
 }
 
 /* ============================
