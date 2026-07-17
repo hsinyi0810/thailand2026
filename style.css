@@ -992,8 +992,30 @@ body {
   border-color: #FFC107;
 }
 
+.alert-card.checkin {
+  background: #EAF4FF;
+  border-color: #90CAF9;
+  margin-bottom: 16px;
+}
+
 .alert-icon { flex-shrink: 0; }
 .alert-icon .icon-svg svg { width: 24px; height: 24px; stroke: #e74c3c; }
+.alert-card.checkin .alert-icon .icon-svg svg { stroke: #1976D2; }
+
+.alert-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+  color: #1565C0;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  border-bottom: 1px solid #90CAF9;
+  padding-bottom: 1px;
+}
+.alert-link:hover { color: #0D47A1; border-bottom-color: #1565C0; }
+.alert-link .icon-svg svg { width: 13px; height: 13px; stroke: #1565C0; }
 
 .notes-grid {
   display: grid;
