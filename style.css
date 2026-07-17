@@ -733,7 +733,8 @@ body {
 .wday-extra .icon-svg svg { width: 12px; height: 12px; }
 
 .weather-tips { background: var(--white); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
-.weather-tips h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 20px; }
+.weather-tips h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+.weather-tips h3 .icon-svg svg { width: 20px; height: 20px; stroke: var(--primary); }
 
 .tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
 
@@ -748,7 +749,7 @@ body {
 }
 
 .tip-icon { flex-shrink: 0; }
-.tip-icon .icon-svg svg { width: 22px; height: 22px; }
+.tip-icon .icon-svg svg { width: 22px; height: 22px; stroke: var(--primary); }
 .tip-text { font-size: 0.88rem; line-height: 1.5; }
 
 /* ============================
