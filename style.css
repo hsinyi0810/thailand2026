@@ -142,6 +142,8 @@ body {
 }
 
 .hero-meta span:hover { background: rgba(255,255,255,0.22); }
+.hero-meta span { display: inline-flex; align-items: center; gap: 6px; }
+.hero-meta .icon-svg svg { width: 15px; height: 15px; stroke: rgba(255,255,255,0.9); }
 
 /* Countdown */
 .hero-countdown {
@@ -225,6 +227,15 @@ body {
   display: inline-flex;
   align-items: center;
   vertical-align: middle;
+  flex-shrink: 0;
+}
+
+/* Default size for ALL icons not otherwise specified */
+.icon-svg svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  stroke-width: 2;
   flex-shrink: 0;
 }
 
@@ -335,7 +346,8 @@ body {
   line-height: 1.7;
 }
 
-.info-banner-icon { font-size: 2rem; flex-shrink: 0; }
+.info-banner-icon { flex-shrink: 0; }
+.info-banner-icon .icon-svg svg { width: 28px; height: 28px; }
 
 /* ============================
    Flight Cards
@@ -461,8 +473,10 @@ body {
 
 .hotel-info { flex: 1; min-width: 160px; }
 .hotel-name { font-weight: 700; font-size: 1rem; }
-.hotel-location { font-size: 0.85rem; color: var(--text-sub); margin-top: 2px; }
-.hotel-phone { font-size: 0.9rem; color: var(--text-sub); white-space: nowrap; }
+.hotel-location { font-size: 0.85rem; color: var(--text-sub); margin-top: 2px; display: flex; align-items: center; gap: 4px; }
+.hotel-location .icon-svg svg { width: 13px; height: 13px; stroke: var(--text-sub); }
+.hotel-phone { font-size: 0.9rem; color: var(--text-sub); white-space: nowrap; display: flex; align-items: center; gap: 4px; }
+.hotel-phone .icon-svg svg { width: 13px; height: 13px; stroke: var(--text-sub); }
 
 /* ============================
    Contacts
@@ -542,7 +556,11 @@ body {
   padding: 4px 10px;
   border-radius: 12px;
   font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
+.day-location-badge .icon-svg svg { width: 12px; height: 12px; stroke: var(--secondary); }
 
 .day-content { margin-top: 16px; }
 
@@ -580,7 +598,11 @@ body {
   background: var(--secondary-light);
   border-radius: var(--radius-sm);
   margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
+.day-hotel .icon-svg svg { width: 15px; height: 15px; stroke: var(--secondary); }
 
 /* ============================
    Weather
@@ -601,7 +623,8 @@ body {
   border: 1px solid var(--border);
 }
 
-.weather-stat-icon { font-size: 2rem; margin-bottom: 8px; }
+.weather-stat-icon { margin-bottom: 8px; }
+.weather-stat-icon .icon-svg svg { width: 28px; height: 28px; stroke: var(--primary); }
 .weather-stat-value { font-size: 1.2rem; font-weight: 800; color: var(--text); margin-bottom: 4px; }
 .weather-stat-label { font-size: 0.8rem; color: var(--text-sub); }
 
@@ -709,7 +732,8 @@ body {
   border: 1px solid var(--border);
 }
 
-.tip-icon { font-size: 1.5rem; flex-shrink: 0; }
+.tip-icon { flex-shrink: 0; }
+.tip-icon .icon-svg svg { width: 22px; height: 22px; }
 .tip-text { font-size: 0.88rem; line-height: 1.5; }
 
 /* ============================
@@ -736,7 +760,12 @@ body {
   cursor: pointer;
   transition: all 0.2s;
   text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 }
+.family-tab .icon-svg svg { width: 18px; height: 18px; stroke: currentColor; }
 
 .family-tab:hover {
   border-color: var(--primary);
@@ -934,7 +963,8 @@ body {
   border-color: #FFC107;
 }
 
-.alert-icon { font-size: 1.8rem; flex-shrink: 0; }
+.alert-icon { flex-shrink: 0; }
+.alert-icon .icon-svg svg { width: 24px; height: 24px; stroke: #e74c3c; }
 
 .notes-grid {
   display: grid;
