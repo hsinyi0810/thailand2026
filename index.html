@@ -6,6 +6,8 @@
   <title>🇹🇭 泰國曼谷 + 華欣 6 日遊 2026</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+  <!-- Lucide icons (SVG sprite via CDN) -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
 <body>
 
@@ -40,11 +42,11 @@
 
   <!-- Nav -->
   <nav class="nav-tabs" id="navTabs">
-    <button class="tab-btn active" data-tab="flight">✈️ 班機資訊</button>
-    <button class="tab-btn" data-tab="itinerary">🗺️ 旅遊行程</button>
-    <button class="tab-btn" data-tab="weather">🌤️ 泰國天氣</button>
-    <button class="tab-btn" data-tab="todo">✅ 行前準備</button>
-    <button class="tab-btn" data-tab="notes">📋 注意事項</button>
+    <button class="tab-btn active" data-tab="flight"><i data-lucide="plane"></i> 班機資訊</button>
+    <button class="tab-btn" data-tab="itinerary"><i data-lucide="map"></i> 旅遊行程</button>
+    <button class="tab-btn" data-tab="weather"><i data-lucide="cloud-sun"></i> 泰國天氣</button>
+    <button class="tab-btn" data-tab="todo"><i data-lucide="check-square"></i> 行前準備</button>
+    <button class="tab-btn" data-tab="notes"><i data-lucide="file-text"></i> 注意事項</button>
   </nav>
 
   <main class="main-container">
@@ -52,7 +54,7 @@
     <!-- 班機資訊 -->
     <section class="tab-content active" id="tab-flight">
       <div class="section-header">
-        <h2>✈️ 班機資訊</h2>
+        <h2><i data-lucide="plane"></i> 班機資訊</h2>
         <p>中華航空 · 桃園國際機場 第一航廈</p>
       </div>
 
@@ -112,7 +114,7 @@
       </div>
 
       <!-- 住宿 -->
-      <div class="section-sub-header"><h3>🏨 住宿安排</h3></div>
+      <div class="section-sub-header"><h3><i data-lucide="building-2"></i> 住宿安排</h3></div>
       <div class="hotel-list">
         <div class="hotel-card">
           <div class="hotel-dates">07.21 — 07.22</div>
@@ -141,7 +143,7 @@
       </div>
 
       <!-- 導遊 -->
-      <div class="section-sub-header"><h3>👤 聯絡資訊</h3></div>
+      <div class="section-sub-header"><h3><i data-lucide="phone"></i> 聯絡資訊</h3></div>
       <div class="contact-grid">
         <div class="contact-card">
           <div class="contact-label">曼谷導遊</div>
@@ -164,7 +166,7 @@
     <!-- 旅遊行程 -->
     <section class="tab-content" id="tab-itinerary">
       <div class="section-header">
-        <h2>🗺️ 旅遊行程</h2>
+        <h2><i data-lucide="map"></i> 旅遊行程</h2>
         <p>曼谷 + 華欣 6 日精彩行程</p>
       </div>
 
@@ -310,7 +312,7 @@
     <!-- 泰國天氣 -->
     <section class="tab-content" id="tab-weather">
       <div class="section-header">
-        <h2>🌤️ 泰國天氣</h2>
+        <h2><i data-lucide="cloud-sun"></i> 泰國天氣</h2>
         <p>曼谷 Bangkok & 華欣 Hua Hin · 旅遊期間天氣預報</p>
       </div>
 
@@ -381,7 +383,7 @@
     <!-- 待辦事項 -->
     <section class="tab-content" id="tab-todo">
       <div class="section-header">
-        <h2>✅ 行前準備清單</h2>
+        <h2><i data-lucide="check-square"></i> 行前準備清單</h2>
         <p>出國前必備物品，勾選已準備好的項目</p>
       </div>
 
@@ -416,7 +418,7 @@
     <!-- 注意事項 -->
     <section class="tab-content" id="tab-notes">
       <div class="section-header">
-        <h2>📋 重要注意事項</h2>
+        <h2><i data-lucide="alert-circle"></i> 重要注意事項</h2>
         <p>出發前請仔細閱讀</p>
       </div>
 
@@ -431,7 +433,7 @@
 
       <div class="notes-grid">
         <div class="note-category">
-          <h3>🧳 行李規定</h3>
+          <h3><i data-lucide="luggage"></i> 行李規定</h3>
           <ul>
             <li>以一件不超過 23 公斤及手提行李一件為原則</li>
             <li>手提行李禁止放壓縮氣體、腐蝕物、爆裂物、易燃品、放射性物品</li>
@@ -441,7 +443,7 @@
         </div>
 
         <div class="note-category">
-          <h3>🛂 入境規定</h3>
+          <h3><i data-lucide="stamp"></i> 入境規定</h3>
           <ul>
             <li>護照有效期限需滿半年以上，始可入境</li>
             <li>持觀光簽證每人入境需攜帶 2 萬泰銖，家庭需 4 萬泰銖</li>
@@ -451,7 +453,7 @@
         </div>
 
         <div class="note-category">
-          <h3>⚡ 電力 & 設備</h3>
+          <h3><i data-lucide="zap"></i> 電力 &amp; 設備</h3>
           <ul>
             <li>電壓：220V，若有攜帶電器品，請自備變壓器</li>
             <li>佔床者每人加贈一張 5G 上網 SIM 卡</li>
@@ -459,7 +461,7 @@
         </div>
 
         <div class="note-category">
-          <h3>🏛️ 參觀禮儀</h3>
+          <h3><i data-lucide="landmark"></i> 參觀禮儀</h3>
           <ul>
             <li>參觀大皇宮、大城邦芭夏宮、拷汪宮、寺廟等，不能穿短褲、短裙、背心</li>
             <li>不能穿拖鞋、涼鞋、破洞設計的衣褲（含透明設計）</li>
@@ -467,7 +469,7 @@
         </div>
 
         <div class="note-category">
-          <h3>💰 消費習慣</h3>
+          <h3><i data-lucide="banknote"></i> 消費習慣</h3>
           <ul>
             <li>泰國是習慣付小費的國家，泰式按摩或 SPA 約 50–100 泰銖</li>
             <li>床頭小費一間房每天約 20 泰銖</li>
@@ -476,7 +478,7 @@
         </div>
 
         <div class="note-category">
-          <h3>🐷 禁止攜帶</h3>
+          <h3><i data-lucide="ban"></i> 禁止攜帶</h3>
           <ul>
             <li>禁止攜帶任何肉品及肉類製品入境台灣與泰國</li>
             <li>違規者最高罰款新台幣 100 萬元</li>
@@ -485,7 +487,7 @@
         </div>
 
         <div class="note-category">
-          <h3>🚗 交通安全</h3>
+          <h3><i data-lucide="car"></i> 交通安全</h3>
           <ul>
             <li>搭乘計程車、小巴等交通工具皆須繫上安全帶</li>
             <li>違規罰款：計程車 500 泰銖，小巴 5000 泰銖（由旅客自付）</li>
@@ -493,7 +495,7 @@
         </div>
 
         <div class="note-category">
-          <h3>🛡️ 保險 & 服務</h3>
+          <h3><i data-lucide="shield-check"></i> 保險 &amp; 服務</h3>
           <ul>
             <li>本公司依政府規定每人投保 250 萬旅遊綜合保險及 20 萬意外醫療險</li>
             <li>提供全年無休 24 小時待機「緊急專線」</li>

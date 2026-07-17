@@ -219,6 +219,34 @@ body {
 }
 
 /* ============================
+   Lucide Icon Global
+   ============================ */
+i[data-lucide], svg.lucide {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+/* Section header icons */
+.section-header h2 svg.lucide,
+.section-sub-header h3 svg.lucide,
+.note-category h3 svg.lucide {
+  width: 20px; height: 20px;
+  margin-right: 6px;
+  stroke: var(--primary-dark);
+  stroke-width: 2;
+  vertical-align: -3px;
+}
+
+/* Tab button icons */
+.tab-btn svg.lucide {
+  width: 16px; height: 16px;
+  margin-right: 5px;
+  vertical-align: -2px;
+  stroke-width: 2;
+}
+
+/* ============================
    Navigation Tabs
    ============================ */
 .nav-tabs {
